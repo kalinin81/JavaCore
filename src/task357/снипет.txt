@@ -1,0 +1,69 @@
+заголовок
+Ошибка NullPointerException в задаче 3.5.7
+ссылка на ошибку
+https://javamentor.slack.com/files/U011HTSG7U1/F011ZPGUUQ1/nullpointerexception.txt
+ссылка на исходники
+https://javamentor.slack.com/files/U011HTSG7U1/F011W8NB9RA/task357.zip
+текст
+Подскажите, как понять по ошибке NullPointerException из “консоли в Chrome” что не так в коде к задаче 3.5.7? В IDEA задача прошла простой тест. Вот, если что, исходники.
+код
+	public Label checkLabels(TextAnalyzer[] analyzers, String text) {
+		//Твой код здесь
+		for (TextAnalyzer a: analyzers){
+		    Label l = a.processText(text);
+		    if(l!=Label.OK){
+		        return l;
+		    }
+		}
+		return Label.OK;
+	}
+	
+	//Твой код здесь
+    public class NegativeTextAnalyzer extends KeywordAnalyzer{
+        private String[] keyWords = {":(","=(",":|"};
+        public Label getLabel(){
+            return Label.NEGATIVE_TEXT;
+        }
+        public String[] getKeyWords(){
+            return keyWords;
+        }
+    }
+    
+    
+    public class SpamAnalyzer extends KeywordAnalyzer{
+        private String[] keywords;
+        public SpamAnalyzer(String[] keyWords){
+            this.keywords=keyWords;
+        }
+        public Label getLabel(){
+            return Label.SPAM;
+        }
+        public String[] getKeyWords(){
+            return keywords;
+        }
+    }
+    
+    
+    public class TooLongTextAnalyzer implements TextAnalyzer{
+        private int maxLength;
+        
+        public TooLongTextAnalyzer(int maxLength){
+            this.maxLength=maxLength;
+        }
+        public Label processText(String text){
+            return text.length()<=maxLength?Label.OK:Label.TOO_LONG;
+        }
+    }
+    
+    public abstract class KeywordAnalyzer implements TextAnalyzer{
+        protected abstract String[] getKeyWords();
+        protected abstract Label getLabel();
+        public Label processText(String text){
+            for (String str: getKeyWords()){
+                if (text.contains(str)){
+                    return getLabel();
+                }
+            }
+            return Label.OK;
+        }
+    }

@@ -1,0 +1,497 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1894.4">
+  <style type="text/css">
+ 	
+  p.myp1 {text-align: left;}
+ 	.code1 {font: 14.0px Courier}
+  span.keywords {}
+
+
+.ex1 .s0 { color: #000080; font-weight: bold;}
+.ex1 .s1 { color: #000000;}
+.ex1 .s2 { color: #808080; font-style: italic;}
+.ex1 .ln { color: #999999; font-weight: normal; font-style: normal;}
+
+.ex2 .s0 { color: #000000;}
+.ex2 .s1 { color: #000080; font-weight: bold;}
+.ex2 .s2 { color: #0000ff;}
+.ex2 .ln { color: #999999; font-weight: normal; font-style: normal; }
+
+.ex3 .s0 { color: #000000;}
+.ex3 .s1 { color: #000080; font-weight: bold;}
+.ex3 .s2 { color: #008000; font-weight: bold;}
+.ex3 .s3 { color: #808080; font-style: italic;}
+.ex3 .ln { color: #999999; font-weight: normal; font-style: normal; }
+
+.ex4 .s0 { color: #000080; font-weight: bold;}
+.ex4 .s1 { color: #000000;}
+.ex4 .s2 { color: #808080; font-style: italic;}
+.ex4 .s3 { color: #008000; font-weight: bold;}
+.ex4 .ln { color: #999999; font-weight: normal; font-style: normal; }
+
+
+
+.keywords { color: #000080; font-weight: bold;}
+
+.mylist {margin: 0; text-indent: 20px}
+.mylist1 {margin: 0; text-indent: 20px}
+
+  </style>
+</head>
+<body>
+<!-- <p class="p5"><span class="s1"><b>div</b></span></p> -->
+<!-- <div class="h1">Detected 1</div> -->
+
+<!--
+ul.menu_spisok {
+  display: block;
+  position: absolute;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  left: 68px;
+  top: 52px;
+  z-index: 2;
+}
+
+li.menu_spisok {
+  padding-top: 10px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+-->
+
+<h1 class="h1">3. Объекты, классы и пакеты в Java</h1>
+<h2 class="h2">3.2. Пакеты и модификаторы доступа</h2>
+<h3 class="h3">3.2.1. Пакеты</h3>
+<p class="myp1">Итак, мы собираемся писать программы в объектно-ориентированном стиле. Если следовать духу ООП, то наша программа будет разбита на маленькие классы, каждый из которых слабо связан с остальными и сильно специализирован, то есть решает одну задачу, а не делает все сразу. Когда количество классов в нашей программе переваливает за десяток, то возникает необходимость наши классы как-то упорядочивать и структурировать. Для этого в Java есть пакет, о них-то мы сейчас и поговорим. Принадлежность класса к пакету обозначается директивой <code class="code1">package</code> в самом начале файла с исходным кодом класса. Обычно эта директива идет первой же строчкой, перед ней могут быть только комментарии. Вот это <code class="code1">lection.java</code> имя пакета. С учетом того, что класс <code class="code1">HelloWorld</code> находится в этом пакете, полное имя класса будет <code class="code1">lection.HelloWorld</code>. Когда Вы запускаете виртуальную машину командой <code class="code1">java</code>, то ей всегда нужно передавать полное имя класса. Если в файле несколько классов, то директива <code class="code1">package</code> действует на все. В отсутствии директивы <code class="code1">package</code> класс принадлежит пакету по-умолчанию, а полное имя класса совпадает с его коротким именем <code class="code1">HelloWorld</code>. В <code class="code1">Java</code> принято раскладывать исходники в соответствии с их пакетами. Исходный код такого класса должен располагаться в файле <code class="code1">lection.HelloWorld.java</code>. То же справедливо и для скомпилированного байт-кода: класс-файлы будут расложены по директориям в соответствии с их пакетами. Это важно для виртуальной машины, которая, когда ей потребуется загрузить класс <code class="code1">lection.HelloWorld</code>, она будет его искать строго в файле <code class="code1">lection.HelloWorld.class</code> и нигде более. Пакет задает область видимости класса. Другие классы в этом же пакете могут обращаться к классу <code class="code1">HelloWorld</code> по его короткому имени. Класс из других пакетов должны ссылаться на класс <code class="code1">HelloWorld</code> по его полному имени либо использвать директиву <code class="code1">import</code>. Импортировать можно конкретные классы <code class="code1">import
+  lection.HelloWorld</code> или все содержимое сразу <code class="code1"><span class="keywords">import</span> java.util.*</code>. Кстати, такие классы как <code class="code1">Integer</code> и прочие обертки (<code class="code1">String, System</code>), с которыми мы уже имели дело, на самом деле находятся в стандартном пакете <code class="code1">java.lang</code>. Однако импортировать нам их не приходилось. Это потому, что в любой Java-программе подразумевается неявный импорт всех классов из пакета <code class="code1">java.lang</code> (<code class="code1">import java.lang.*</code>). Классы этого пакета всегда доступны по их коротким именам. Интересная особенность - классы из пакета по-умолчанию невозможно использовать из других пакетов даже при наличии явного импорта. Есть еще одна форма директивы импорта - <code class="code1"><span class="keywords">import static</span></code>, которая позволяим импортировать статические поля и методы, то есть в тексте программы к ним можно будет обращаться, не указывая имя класса, например <code class="code1">sqrt(4)</code> или <code class="code1">out.println("foo")</code>. Так же есть вариант со звездочкой, который импортирует все статические поля и методы из класса, иногда удобно, но злоупотреблять этим не стоит. Подчеркну, что директива <code class="code1"><span class="keywords">import</span></code> служит только одной цели - она позволяет в исходном коде Вашей программы ссылаться на импортированные классы по их коротким именам. Никакой подстановки тела импортированных классов в Ваш файл не происходит, то есть это не аналог директивы <code class="code1"><span class="keywords">include</span></code> из С. Когда Ваша программа исполняется в виртуальной машине, то все импортированные классы так же должны присутствовать в ClassPath.
+</p>
+<h3 class="h3">3.2.2. Пакеты стандартной библиотеки</h3>
+<p class="myp1">
+Классы стандартной библиотеки Java находятся в пакетах с префиксами <code class="code1">java</code> и <code class="code1">javax</code>. Здесь я привел пакеты, классы из которых используются чаще всего.</p>
+
+<p class="mylist">Пакеты стандартной библиотеки</p>
+<ul class="code1 mylist">
+  <li>java.lang</li>
+  <li>java.io</li>
+  <li>java.nio</li>
+  <li>java.math</li>
+  <li>java.time</li>
+  <li>java.util</li>
+  <li>java.util.regex</li>
+  <li>javax.xml</li>
+  <li>...</li>
+</ul>
+
+<p class="myp1">
+ Копаясь в jar'ах, входящих в состав JRE, Вы можете так же наткнуться на пакеты <code class="code1">com.oracle, com.sun, sun</code> и массу классов в них. Эти классы являются спецификой реализации оракловой джавы и не предназначены для использования прикладными программистами. Во-первых, они доступны в реализации Java от Oracle, соответственно программа, использующая их, не будет переносима. Во-вторых, нет никаких гарантий, что эти классы не будут удалены, переименованы или другим несовместимым образом изменены в следующей версии Java.
+</p>
+<p>
+  Для пользовательских пакетов в Java существует следующее соглашение: пакеты принято называть в соответствии с доменными именами компании, продукта или проекта, в рамках которых этот код написан. Например, для моего курса на stepic.org согласно этой рекомендации имя пакет должно начинаться <code class="code1">org.stepic</code>. Код, который пишут в компании Google будет начинаться с <code class="code1">com.google</code>. Многие проекты, исходники которых хостятся на sourceforge.net имеют имя пакета, начинающиеся на <code class="code1">net.sf</code>. Внутри уже можно заводить произвольную структуру подпакетов. Смысл правила про использование доменных имен при именовании пакетов состоит в том, чтобы снизить вероятность коллизий имен классов, написанных разными людьми. Благодаря этому, например, можно найти в интернете какую-то java-библиотеку, скачать .jar, подключить к своей программе и не беспокоиться о том, что классы из этого jar'а будут конфликтовать с классами Вашей программы или классами других подключенных библиотек.
+</p>
+
+<p class="mylist">Пакеты для стороннего кода</p>
+<ul class="code1 mylist">
+  <li>lection.java</li>
+  <li>com.google.common</li>
+  <li>org.apache.maven</li>
+  <li>com.intellij.idea</li>
+  <li>net.sf.json</li>
+  <li>io.netty</li>
+  <li>...</li>
+</ul>
+
+<p>
+  Помимо задания области видимости и предотвращения коллизии имен, пакеты могут служить для группировки связанных классов внутри программы. Например, все классы, относящиеся к ядру программы, могут быть собраны в пакете <code class="code1">core</code>, разнообразные утилитные классы - в пакете <code class="code1">util</code>, подключаемые модули - в пакете <code class="code1">plugins</code>.
+</p>
+
+<h3 class="h3">3.2.3. Еще одна функция пакетов</h3>
+
+<p>
+  И еще одна функция пакетов - это ИНКАПСУЛЯЦИЯ на более высоком уровне, чем классы. При помощи модификаторов доступа можно сделать класс, метод или поле доступным только в пределах пакета. То есть можно скрыть какие-то детали реализации внутри пакета так, что они будут недоступны классам из других пакетов. Это особенно важно, например, когды Вы пишите библиотеку, которую будут использовать другие программисты. В этом случае Вам нужно выставить наружу только строго определенное подмножество классов и методов, а все остальное (детали реализации Вашей библиотеки) максимально скрыть. Казалось бы, кому могут понадобится Ваши внутренние классы? Так же думали и разработчики из Sun Microsystems и вот теперь мы имеем огромное количество программ, зависящих от классов из пакетов <code class="code1">sun.mics</code> или <code class="code1">com.sun</code>, которые никогда не были предназначены для широкого использования. Так что не надо недооценивать сообразительность и длину рук программистов, которые будут использовать написанный Вами код. Против длинных рук других программистов помогут специальные ключевые слова - модификаторы, устанавливающие правила доступа к Вашим классам, их полям и методам. В Java есть 4 типа доступа:
+  <dl class="mylist">
+    <dt><code class="code1">pubic</code></dt>
+    <dd>Разрешен доступ отовсюду без ограничений</dd>
+    <dt><code class="code1">protected</code></dt>
+    <dd>Доступ разрешен только из классов-наследников и для классов текущего пакета</dd>
+    <dt>Отсутствие модификатора</dt>
+    <dd>Означает доступ только в пределах пакета</dd>
+    <dt><code class="code1">private</code></dt>
+    <dd>Доступ только в пределах класса</dd>
+  </dl>
+
+  <table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+  <tr><td><center>
+  <font face="Arial, Helvetica" color="#000000">
+  Модификаторы доступа</font>
+  </center></td></tr></table>
+  <div class="ex1">
+  <pre><a name="l1"><span class="ln">1    </span></a><span class="s0">public class </span>ModifiersDemo {
+<a name="l2"><span class="ln">2    </span></a>    <span class="s0">public static void </span>visibleEverywhere() {}
+<a name="l3"><span class="ln">3    </span></a>    <span class="s0">protected static void </span>inSubclasses() {}
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">static void </span>inPackage() {}
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">private void </span>inClass() {}
+<a name="l6"><span class="ln">6    </span></a>}
+<a name="l7"><span class="ln">7    </span></a></pre>
+  </div>
+
+</p>
+<p>
+  Модификаторы <code class="code1">protected</code> и <code class="code1">private</code> не применимы к классам верхнего уровня - их можно применять к вложенным классам, но о вложенных классах мы поговорим отдельно. Так же в некоторых контекстах отсутствие модификатора означает не пакетную видимость, а что-то другое, но об этом мы тоже будем говорить потом, когда придет время.
+</p>
+<p>
+  Стоит хорошенько думать о том, какие элементы Вашей программы Вы выставляете в общее пользование, а какие - нет. Если сомневаетесь, то лучше поставьте более строгий модификатор доступа. Если в один прекрасный момент действительно появится реальная необходимость переиспользовать Ваш код в другом месте, то поставить другом модификатор доступа будет не трудно. А вот если изначально Вы объявили Ваш класс как публичный, а потом передумали, то Вам, возможно, придется перелопатить немаленькое количество кода, где Ваш класс таки могли успеть заиспользовать. И вообще далеко не всегда Вам доступен код, где могут использоваться Ваши классы. Например, если Вы выкладываете библиотеку в интернет, то Вы уже ничего не контроллируете и фактически Вы подписываетесь поддерживать обратную совместимость, то есть не удалять, не переименовывать и не менять другим несовместимым образом ничего из публичных классов, методов и полей. Пользователи очень не любят, когда новые версии библиотеки ломает им их код.
+</p>
+
+<h2 class="h2">3.3. Объявление класса</h2>
+
+<h3 class="h3">3.3.1. Объявление класса</h3>
+
+<p>
+  Разберем теперь подробно объявление класса: какие ключевые слова могут использоваться в объявлении класса, что они означают и вообще чем может быть класс наполнен. Для данного урока я подобрал стандартные примеры из библиотеки Java с реализацией от Oracle, так что мы даже немножко заглядем в исходники стандартной библиотеки, но должен предупредить, что код приведен со значительными сокращениями, чтобы не отвлекаться на вещи, которые мы, например, еще не знаем и сосредоточиться на главном. Итак, приступим. Класс объявляется ключевым словом <code class="code1"><span class="keywords">class</span></code> с именем класса и модификатором доступа. В случае класса верхнего уровня может использоваться модификатор <code class="code1"><span class="keywords">public</span></code> или модификатора может не быть, что означает видимость класса в пределах пакета. Модификаторы <code class="code1"><span class="keywords">private</span></code> и <code class="code1"><span class="keywords">protected</span></code> здесь лишены смысла. Напомню, что в одном исходном файле друг за другом может быть объявлено несколько классов, но пабликом может быть только один из них и его имя обязано совпадать с именем файла. Ключевое слово <code class="code1"><span class="keywords">final</span></code> означает, что от данного класса нельзя НАСЛЕДОВАТЬСЯ, то есть он является финальным в иерархии наследования. Подробнее про НАСЛЕДОВАНИЕ мы поговорим в следующем уроке. Любой элемент программы (класс, поле, метод) может сопровождаться JavaDoc-комментарием. Классы стандартной библиотеки снабжены хорошими, подробными JavaDoc'ами, поэтому часто можно решить какой-то вопрос по использованию стандартной библиотеки просто почитав их JavaDoc, не обязательно сразу лезть на StackOverflow
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Объявление класса</font>
+</center></td></tr></table>
+  <div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a><span class="s2">/**</span>
+<a name="l3"><span class="ln">3    </span></a> <span class="s2">* The {</span><span class="s3">@code </span><span class="s2">Integer} class wraps a value of the primitive type</span>
+<a name="l4"><span class="ln">4    </span></a> <span class="s2">* {</span><span class="s3">@code </span><span class="s2">int} in an object. An object of type {</span><span class="s3">@code </span><span class="s2">Integer}</span>
+<a name="l5"><span class="ln">5    </span></a> <span class="s2">* contains a single field whose type is {</span><span class="s3">@code </span><span class="s2">int}.</span>
+<a name="l6"><span class="ln">6    </span></a> <span class="s2">*/</span>
+<a name="l7"><span class="ln">7    </span></a><span class="s0">public final class </span>Integer {
+<a name="l8"><span class="ln">8    </span></a>    <span class="s2">//...</span>
+<a name="l9"><span class="ln">9    </span></a>}
+<a name="l10"><span class="ln">10   </span></a></pre>
+  </div>  
+</p>
+
+<h3 class="h3">3.3.3. Поля и Конструкторы</h3>
+
+<p>
+  Состояние экземпляра класса хранится в переменных - членах класса, которые в Java называются полями. Объявление поля состоит из модификатора доступа, типа поля и его имени. Тут же можно присвоить полю начальное значение, которое поле будет иметь во всех свежесозданных экземплярах класса. Если значение не указано, то поле будет иметь значение по-умолчанию: 0 (нуль), null или false в зависимости от типа поля. У каждого экземпляра будет свое собственное поле, значение которого можно менять независимо от других экземпляров. В данном примере поле объявлено как <code class="code1"><span class="keywords">private</span></code>. Это типичная практика в Java. В большинстве случаев состояние экземпляра класса, то есть значения его полей, является деталью реализации и должно быть скрыто. Например, у <code class="code1"><span class="keywords">BigInteger</span></code> внутри находится пол-дюжины хитрых полей, но знать об этом остальному коду совершенно не нужно. Классы должны взаимодействовать друг с другом при помощи осмысленных методов, а не обращаться напрямую к состоянию друг друга.
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Поля</font>
+</center></td></tr></table>
+  <div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a><span class="s0">public final class </span>Integer {
+<a name="l3"><span class="ln">3    </span></a>    <span class="s0">private final int </span>value;
+<a name="l4"><span class="ln">4    </span></a>    <span class="s2">//...</span>
+<a name="l5"><span class="ln">5    </span></a>}
+<a name="l6"><span class="ln">6   </span></a></pre>
+  </div>  
+  Модификатор <code class="code1"><span class="keywords">final</span></code> означает, что значение полю можно присвоить только один раз, после чего менять его будет нельзя. Явное присвоение можно сделать прямо в объявлении поля или в конструкторе. Компилятор проверит, что к моменту выхода из конструктора значение полю будет присвоено. Если это не так, то будет выдана ошибка компиляции. Кстати, модификатор <code class="code1"><span class="keywords">final</span></code> можно применять к локальным переменным и к параметрам методов - смысл его от этого не меняется, значение переменной может быть присвоено только однажды.
+<p></p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Конструкторы</font>
+</center></td></tr></table>
+  <div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>Integer {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">private final int </span>value;
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public </span>Integer(<span class="s0">int </span>value) {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s0">this</span>.value = value;
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    <span class="s2">//...</span>
+<a name="l9"><span class="ln">9    </span></a>}
+<a name="l10"><span class="ln">10   </span></a></pre>
+  </div>  
+
+</p>
+
+<h3 class="h3">3.3.4. Конструкторы</h3>
+
+<p>
+  Собственно, переходим к конструкторам. Конструктор - это специальный метод, вызываемый при создании экземпляра класса - то есть тогда, когда кто-то где-то в программе применяет оператор <code class="code1"><span class="keywords">new</span></code> (например, <code class="code1"><span class="keywords">new </span>Integer(33)</code>). Задача конструктора инициализировать состояние объекта и подготовить его к использованию. Объявление конструктора состоит из модификатора доступа и имени класса. Конструктор может принимать параметры, как и любой другой метод. Если параметр конструтора имеет такое же имя, как поле класса, то для доступа к полю класса используется префикс <code class="code1"><span class="keywords">this</span></code>. <code class="code1"><span class="keywords">this</span></code> - это ссылка на текущий экземпляр, в контексте которого исполняется конструктор или любой другой метод. Обычно явно писать <code class="code1"><span class="keywords">this</span></code> не нужно, но в случае конфликта имен поля и локальной переменной или параметра приходится это делать.
+</p>
+<p>
+  Когда в классе не объявлен ни один конструктор, то неявно создается конструктор по-умолчанию без параметров. То есть если даже в классе нет конструктора, то экземпляр можно все равно создать при помощи <code class="code1"><span class="keywords">new</span></code>. Если нужно запретить создание экземпляров класса, то нужно сделать конструктор приватным.
+</p>
+
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Конструкторы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>Math {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s2">/**</span>
+<a name="l5"><span class="ln">5    </span></a>     <span class="s2">* Don't let anyone instantiate this class.</span>
+<a name="l6"><span class="ln">6    </span></a>     <span class="s2">*/</span>
+<a name="l7"><span class="ln">7    </span></a>    <span class="s0">private </span>Math(){}
+<a name="l8"><span class="ln">8    </span></a>    <span class="s2">//...</span>
+<a name="l9"><span class="ln">9    </span></a>}
+<a name="l10"><span class="ln">10   </span></a></pre>
+</div>
+
+<p>
+  В классе может быть несколько перегруженных версий конструктора с разными наборами параметров, при этом из одного конструктора можно вызывать другой. В некоторых языках поддерживается задание значения по-умолчанию для параметров (то есть можно было бы написать прямо в объявлении метода <code class="code1"><span class="keywords">var </span>name = 10</code>). И это бы означало, что во всех местах вызова конструктора если второй параметр не указан, то он подразумевается равным 10. В Java такой механизм не поддерживается, но при помощи перегрузки конструкторов и вызова одного конструктора из другого его можно успешно эмулировать.
+</p>
+
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Конструкторы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.math;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public class </span>BigInteger {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">public </span>BigInteger(String val){
+<a name="l5"><span class="ln">5    </span></a>        <span class="s0">this</span>(val,<span class="s2">10</span>);
+<a name="l6"><span class="ln">6    </span></a>    }
+<a name="l7"><span class="ln">7    </span></a>    <span class="s0">public </span>BigInteger(String val, <span class="s0">int </span>radix) {
+<a name="l8"><span class="ln">8    </span></a>        <span class="s3">//...</span>
+<a name="l9"><span class="ln">9    </span></a>    }
+<a name="l10"><span class="ln">10   </span></a>}
+<a name="l11"><span class="ln">11   </span></a></pre>
+</div>
+
+<p>
+  Следом за конструкторами логично было бы обсудить деструкторы, но деструкторов в Java нет. Строго говоря JVM поддерживает некоторый специальный метод <code class="code1">finalize()</code>, который будет вызван сборщиком мусора, когда на объект больше нету ссылок. Однако, после многих лет наступания на грабли, сообщество Java-программистов пришло к консенсусу, что полагаться на эту возможность не следует. В первую очередь потому, что метод <code class="code1">finalize()</code> будет вызван в непредсказуемый момент времени и из непредсказуемого потока. Если объекту все таки требуется какая-то подчистка, освобождение ресурсов, то для этого заводят обычный метод, чаще всего с именем <code class="code1">close</code> и ответственность за вызов этого метода возлагается на программиста. Впрочем, как мы узнаем в следующем модуле, в язык встроена удобная синтаксическая конструкция, обеспечивающая неявный вызов метода <code class="code1">close</code> при выходе объекта из области видимости.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.io;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public class </span>FileInputStream {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">protected void </span>finalize() {
+<a name="l5"><span class="ln">5    </span></a>        <span class="s2">// cleanup</span>
+<a name="l6"><span class="ln">6    </span></a>    }
+<a name="l7"><span class="ln">7    </span></a>    <span class="s0">public void </span>close() {
+<a name="l8"><span class="ln">8    </span></a>        <span class="s2">// cleanup</span>
+<a name="l9"><span class="ln">9    </span></a>    }
+<a name="l10"><span class="ln">10   </span></a>    <span class="s2">//...</span>
+<a name="l11"><span class="ln">11   </span></a>}
+<a name="l12"><span class="ln">12   </span></a></pre>
+</div>
+
+<h3 class="h3">3.3.6. Методы</h3>
+
+<p>
+  От конструкторов мы уже плавно перешли к обсуждению методов. Объявление метода состоит из модификатора доступа, типа возвращаемого значения или <code class="code1"><span class="keywords">void</span></code>, имени и параметров. Метод исполняется в контексте конкретного экземпляра класса, поэтому он может обращаться к полям текущего объекта. Метод может иметь модификатор <code class="code1"><span class="keywords">final</span></code>. Это означает, что метод не может быть переопределен в классах-НАСЛЕДНИКАХ. Впрочем, в данном примере класс объявлен как <code class="code1"><span class="keywords">final</span></code>, поэтому расставлять <code class="code1"><span class="keywords">final</span></code> на методах избыточно - все равно от этого класса не унаследоваться.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Методы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>Integer {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">private final int </span>value;
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public int </span>intValue() {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s0">return </span>value;
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    <span class="s2">//...</span>
+<a name="l9"><span class="ln">9    </span></a>}</pre>
+</div>
+
+<p>
+  В классе может быть несколько перегруженных методов с одинаковыми именами, но разными наборами параметров. За счет этого, например, можно эмулировать значения по-умолчанию для параметров.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Методы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>String {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">public int </span>indexOf(<span class="s0">int </span>ch){
+<a name="l5"><span class="ln">5    </span></a>        <span class="s0">return </span>indexOf(ch, <span class="s2">0</span>);
+<a name="l6"><span class="ln">6    </span></a>    }
+<a name="l7"><span class="ln">7    </span></a>    <span class="s0">public int </span>indexOf(<span class="s0">int </span>ch, <span class="s0">int </span>fromIndex){
+<a name="l8"><span class="ln">8    </span></a>        <span class="s3">//...</span>
+<a name="l9"><span class="ln">9    </span></a>    }
+<a name="l10"><span class="ln">10   </span></a>    <span class="s3">//...</span>
+<a name="l11"><span class="ln">11   </span></a>}
+<a name="l12"><span class="ln">12   </span></a></pre>
+</div>
+
+<p>
+  Поля и методы могут быть статическими, то есть объявленными с модификатором <code class="code1"><span class="keywords">static</span></code>. Как минимум один статический метод присутствует в любой программе - это метод <code class="code1">main</code>. Статические поля и методы существуют независимо от экземпляров класса и могут вызываться просто по имени класса, то есть например <code class="code1">Integer.rotateRight(5, 7)</code>. Статический метод исполняется в контексте класса, а не конкретного экземпляра, поэтому он не имеет доступа к <code class="code1"><span class="keywords">this</span></code> и нестатическим полям и методам. В комбинации с <code class="code1"><span class="keywords">static</span></code> <code class="code1"> модификатор <span class="keywords">final</span></code> используется для объявления констант. Ключевое слово <code class="code1"><span class="keywords">const</span></code>, известное по другим языкам в Java не поддерживается. Имена констант принято записывать в верхнем регистре, разделяя слова подчеркиваниями (например, <code class="code1">MIN_VALUE</code>)
+</p>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Статические поля и методы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>Integer {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">public static final int </span>MIN_VALUE = <span class="s2">0x80000000</span>;
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public static int </span>rotateRight(<span class="s0">int </span>i, <span class="s0">int </span>distance) {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s0">return </span>(i &gt;&gt;&gt; distance) | (i &lt;&lt; -distance);
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    <span class="s3">//...</span>
+<a name="l9"><span class="ln">9    </span></a>}</pre>
+</div>
+
+<p>
+  Делая поля класса приватными и не предоставляя методов для изменения значений полей мы тем самым можем добиться того, что экземпляры нашего класса после создания уже никак не могут быть модифицированы. В качестве примера из того, с чем мы уже знакомы, можно привести все классы-обертки для примитивов, а так же класс <code class="code1">String, BigInteger</code> и <code class="code1">BigDecimal</code>- любое изменение состояние объекта возможно только при создании нового экземпляра. С одной стороны это может быть не очень экономно, но с другой стороны такие классы обладают очень ценным свойством - передавая экземпляры immutable-классов в какой-нибудь метод или иным образом вынося объект на всеобщее обозрение, мы можем быть уверены, что никакой посторонний код, случайно или намеренно, не изменит нам состояние нашего объекта. Например в классе <code class="code1">BigInteger</code> есть вот такая вот константа <code class="code1">ONE</code> - это <code class="code1">BigInteger</code>, представляющий собой единицу. А теперь на секунду представим, что в классе <code class="code1">BigInteger</code> есть метод <code class="code1">setValue</code>, заменяющий значение внутри объекта и какой-нибудь злодей взял бы и написал где-нибудь у себя в коде <code class="code1">BigInteger.ONE.setValue(100500)</code> - это очень КОВАРНО! К счастью, метода <code class="code1">setValue</code> или аналогичного ему в <code class="code1">BigInteger</code> нет.
+</p>
+<p>
+  Вернемся к теме объявления классов. Классы можно объявлять не только на самом верхнем уровне программы, но и внутри других классов. Следующий пример из стандартной библиотеки будет содержать некоторые незнакомые нам слова и символы, которые мы обсудим несколько позже, но пример этот я продемонстрирую именно сейчас, потому что он хорошо демонстрирует полезность вложенных классов. <code class="code1">ArrayList</code> - это коллекция, контейнер для однотипных элементов, но, в отличии от массива, он может динамически изменять свой размер. Когда требуется обойти или обработать все элементы коллекции используется итератор - объект, поочереди возвращающий каждый элемент коллекции. Итератор должен помнить коллекцию, которую он обходит, чтобы получать ее элементы, а так же хранить текущую позицию обхода. Этого легко добиться, поместить определение класса <code class="code1">Iterator</code> внутрь класса <code class="code1">ArrayList</code>. Каждый экземпляр итератора будем иметь собственное состояние, хранящееся в его полях, а также неявную ссылку на экземпляр внешнего класса - то есть из кода итератора можно напрямую обращаться к полям экземпляра <code class="code1">ArrayList</code> , в том числе к приватным.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Вложенные классы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.util;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public class </span>ArrayList&lt;E&gt; {
+<a name="l4"><span class="ln">4    </span></a>    Object[] elementData;
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public </span>Iterator&lt;E&gt; iterator() {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s0">return new </span>Itr();
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    <span class="s0">private class </span>Itr <span class="s0">implements </span>Iterator&lt;E&gt; {
+<a name="l9"><span class="ln">9    </span></a>        <span class="s0">int </span>cursor;
+<a name="l10"><span class="ln">10   </span></a>        <span class="s2">//...</span>
+<a name="l11"><span class="ln">11   </span></a>    }
+<a name="l12"><span class="ln">12   </span></a>    <span class="s2">//...</span>
+<a name="l13"><span class="ln">13   </span></a>}
+<a name="l14"><span class="ln">14   </span></a></pre>
+</div>
+<p>
+  Если вложенный класс снабжем модификатором <code class="code1"><span class="keywords">static</span></code>, то неявная связь с внешним классом теряется и экземпляры вложенного класса будут жить своей собственной независимой жизнью. При этом наличие одного класса внутри другого мотивируется либо желанием скрыть класс, сделав его приватным, либо тесной логической связью внешнего и вложенного классов, требующей доступ к приватным полям друг друга.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Вложенные классы</font>
+</center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.util;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public class </span>Collections {
+<a name="l4"><span class="ln">4    </span></a>    <span class="s0">public static final </span>List EMPTY_LIST = <span class="s0">new </span>EmptyList&lt;&gt;();
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public static final </span>&lt;T&gt; List&lt;T&gt; emptyList() {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s0">return </span>(List&lt;T&gt;) EMPTY_LIST;
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    <span class="s0">private static class </span>EmptyList&lt;E&gt; {
+<a name="l9"><span class="ln">9    </span></a>        <span class="s2">//...</span>
+<a name="l10"><span class="ln">10   </span></a>    }
+<a name="l11"><span class="ln">11   </span></a>}
+<a name="l12"><span class="ln">12   </span></a></pre>
+</div>
+
+<h3 class="h3">3.3.9. Перечисления</h3>
+
+<p>
+  Кроме классов в Java бывают еще интерфейсы, но о них в отдельном уроке, а так же перечисления и аннотации - о них поговорим прямо сейчас. Чтобы подвести разговор к перечислениям, давайте рассмотрим следующий выдуманный пример. Предположим нам в программе надо работать с календарем, в частности с днями недели. День недели можно было бы хранить в памяти в виде целого числа, его порядкового номера. Это будет работать, но, по типу переменной будет совершенно не очевидно, что в ней может храниться не любое число, а только одно из перечисленных (<code class="code1">int dayOfWeek = ???</code>). Можно легко ошибиться и компилятор не сможет помочь следить нам за корректностью программы.
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Перечисления</font>
+</center></td></tr></table>
+<div class="ex2">
+<pre><a name="l1"><span class="ln">1    </span></a>
+<a name="l2"><span class="ln">2    </span></a><span class="s1">public class </span>BadExample {
+<a name="l3"><span class="ln">3    </span></a>    <span class="s1">public static final int </span>MONDAY = <span class="s2">1</span>;
+<a name="l4"><span class="ln">4    </span></a>    <span class="s1">public static final int </span>TUESDAY = <span class="s2">2</span>;
+<a name="l5"><span class="ln">5    </span></a>    <span class="s1">public static final int </span>WEDNESDAY = <span class="s2">3</span>;
+<a name="l6"><span class="ln">6    </span></a>    <span class="s1">public static final int </span>THURSDAY = <span class="s2">4</span>;
+<a name="l7"><span class="ln">7    </span></a>    <span class="s1">public static final int </span>FRIDAY = <span class="s2">5</span>;
+<a name="l8"><span class="ln">8    </span></a>    <span class="s1">public static final int </span>SATURDAY = <span class="s2">6</span>;
+<a name="l9"><span class="ln">9    </span></a>    <span class="s1">public static final int </span>SUNDAY = <span class="s2">7</span>;
+<a name="l10"><span class="ln">10   </span></a>
+<a name="l11"><span class="ln">11   </span></a>}
+<a name="l12"><span class="ln">12   </span></a></pre>
+</div>
+
+<p>
+  Вот как раз для таких случаев в Java существуют перечисления. Перечисления объявяются ключевым словом <code class="code1"><span class="keywords">enum</span></code>. В фигурных скобках через запятую указывается набор допустимых значений перечисления. Перечисления - это полноценный ссылочный тип. Его можно воспринимать как класс с фиксированным количеством экземпляров. Перечисленные в объявлении <code class="code1"><span class="keywords">enum</span></code> значения эквивалентны <code class="code1"><span class="keywords">public static final</span></code> полям класса. Более того, в перечислениях можно объявлять поля и методы. Достаточно после последнего поля поставить точку с запятой, а далее объявлять поля и методы как в обычном классе. Можно также объявить конструктор, в том числе принимающий параметры. В таком случае нужно будет передавать параметры и в объявлении элементов перечисления.
+</p>
+<table class="mytable1"CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0"><tr><td><center><font face="Arial, Helvetica" color="#000000">Перечисления</font></center></td></tr></table>
+<div class="ex1">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span><span class="s1">java.time</span><span class="s0">;</span>
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public enum </span><span class="s1">DayOfWeek {</span>
+<a name="l4"><span class="ln">4    </span></a>    <span class="s1">MONDAY</span><span class="s0">, </span><span class="s2">// &lt;- public static final</span>
+<a name="l5"><span class="ln">5    </span></a>    <span class="s1">TUESDAY</span><span class="s0">, </span><span class="s2">// (args) - параметры в объявлении элементов перечислений </span>
+<a name="l6"><span class="ln">6    </span></a>    <span class="s1">WEDNESDAY</span><span class="s0">,</span>
+<a name="l7"><span class="ln">7    </span></a>    <span class="s1">THURSDAY</span><span class="s0">,</span>
+<a name="l8"><span class="ln">8    </span></a>    <span class="s1">FRIDAY</span><span class="s0">,</span>
+<a name="l9"><span class="ln">9    </span></a>    <span class="s1">SATURDAY</span><span class="s0">,</span>
+<a name="l10"><span class="ln">10   </span></a>    <span class="s1">SUNDAY </span><span class="s2">//; - ставим &quot;;&quot;, чтобы ниже можно было объявлять поля и/или методы</span>
+<a name="l11"><span class="ln">11   </span></a>    <span class="s2">//объявление полей, методов</span>
+<a name="l12"><span class="ln">12   </span></a><span class="s1">}</span>
+<a name="l13"><span class="ln">13   </span></a></pre>
+</div>
+
+<p>
+  В любом перечислении автоматически доступны методы <code class="code1">name()</code>, <code class="code1">ordinal()</code>, а так же статический метод <code class="code1">values()</code>. <code class="code1">name()</code> возвращает строку - имя элемента перечисления как в исходном коде. <code class="code1">ordinal()</code> возвращает число - порядковый номер элемента начиная с нуля в соответствии с объявлением в исходном коде. <code class="code1">values()</code> возвращает массив возможных значений перечисления в том же порядке. Фрагмент кода ниже выводит все элементы перечисления с их порядковыми номерами и именами.
+</p>
+<table class="mytable1"CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0"><tr><td><center><font face="Arial, Helvetica" color="#000000">Перечисления</font></center></td></tr></table>
+<div class="ex3">
+<pre><a name="l1"><span class="ln">1    </span></a>    <span class="s1">for </span>(DayOfWeek day: DayOfWeek.values()) {
+<a name="l2"><span class="ln">2    </span></a>            System.out.println(day.ordinal() + <span class="s2">&quot; &quot; </span>+ day.name());
+<a name="l3"><span class="ln">3    </span></a>    }</pre>
+</div>
+
+<h3 class="h3">3.3.10. Аннотации</h3>
+
+<p>
+  И буквально два слова об аннотациях. В коде стандартной библиотеки в изобилии встречаются пометки <code class="code1">@Depricated</code> и <code class="code1">@SuppressWarnings</code>, а так же некоторые другие на классах и методах. Это не ключевые слова языка, а специальные аннотации, объявленные так же в стандартной библиотеке при помощи ключевого слова <code class="code1"><span class="keywords">interface</span></code>
+</p>
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Аннотации</font>
+</center></td></tr></table>
+<div class="ex4">
+<pre><a name="l1"><span class="ln">1    </span></a><span class="s0">package </span>java.lang;
+<a name="l2"><span class="ln">2    </span></a>
+<a name="l3"><span class="ln">3    </span></a><span class="s0">public final class </span>Character {
+<a name="l4"><span class="ln">4    </span></a>    @Deprecated
+<a name="l5"><span class="ln">5    </span></a>    <span class="s0">public static boolean </span>isJavaLetter(<span class="s0">char </span>c) {
+<a name="l6"><span class="ln">6    </span></a>        <span class="s2">//...</span>
+<a name="l7"><span class="ln">7    </span></a>    }
+<a name="l8"><span class="ln">8    </span></a>    @SuppressWarnings(<span class="s3">&quot;unchecked&quot;</span>)
+<a name="l9"><span class="ln">9    </span></a>    <span class="s0">public static final </span>Class&lt;Character&gt; TYPE = (Class&lt;Character&gt;) Class.getPrimitiveClass(<span class="s3">&quot;char&quot;</span>);
+<a name="l10"><span class="ln">10   </span></a>}
+<a name="l11"><span class="ln">11   </span></a></pre>
+</div>
+
+
+</body>
+
+
+
+
+
+
+</html>

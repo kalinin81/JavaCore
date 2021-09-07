@@ -1,0 +1,62 @@
+	public Label checkLabels(TextAnalyzer[] analyzers, String text) {
+		for (TextAnalyzer a: analyzers){
+		    Label l = a.processText(text);
+		    if(l!=Label.OK){
+		        return l;
+		    }
+		}
+		return Label.OK;
+	}
+
+
+    public class NegativeTextAnalyzer extends KeywordAnalyzer implements TextAnalyzer{
+        private String[] keyWords = {":(","=(",":|"};
+        protected Label getLabel(){
+            return Label.NEGATIVE_TEXT;
+        }
+        protected String[] getKeyWords(){
+            return keyWords;
+        }
+    }
+
+
+    public class SpamAnalyzer extends KeywordAnalyzer implements TextAnalyzer{
+        private String[] keywords;
+        public SpamAnalyzer(String[] keyWords){
+            this.keywords=keyWords;
+        }
+        protected Label getLabel(){
+            return Label.SPAM;
+        }
+        protected String[] getKeyWords(){
+            return keywords;
+        }
+    }
+
+
+    public class TooLongTextAnalyzer implements TextAnalyzer{
+        private int maxLength;
+
+        public TooLongTextAnalyzer(int maxLength){
+            this.maxLength=maxLength;
+        }
+        public Label processText(String text){
+            return text.length()<=maxLength?Label.OK:getLabel();
+        }
+        protected Label getLabel(){
+            return Label.TOO_LONG;
+        }
+    }
+
+    public abstract class KeywordAnalyzer implements TextAnalyzer{
+        protected abstract String[] getKeyWords();
+        protected abstract Label getLabel();
+        public Label processText(String text){
+            for (String str: getKeyWords()){
+                if (text.contains(str)){
+                    return getLabel();
+                }
+            }
+            return Label.OK;
+        }
+    }
